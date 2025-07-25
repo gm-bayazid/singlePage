@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from '@emailjs/browser';
 import "./LandingPage.css";
@@ -14,8 +14,7 @@ import TestimonialsCarousel from "./TestimonialsCarousel";
 import FloatingWhatsApp from "./FloatingWhatsApp";
 import PricingSection from "./PricingSection";
 import { Helmet } from 'react-helmet';
-
-
+import { useRef } from "react";
 
 
 
@@ -41,6 +40,11 @@ const heroChild = {
   }
 };
 
+const fadeInVariant = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
+};
+
 export default function LandingPage() {
   const [formStatus, setFormStatus] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
@@ -57,6 +61,22 @@ export default function LandingPage() {
   const [recaptchaValue, setRecaptchaValue] = useState(null);
   const [formError, setFormError] = useState('');
   const [selectedPlan, setSelectedPlan] = useState("");
+
+  // Section refs and inView
+  const featuresRef = useRef(null);
+  const featuresInView = useInView(featuresRef, { amount: 0.2, once: false });
+  const actionRef = useRef(null);
+  const actionInView = useInView(actionRef, { amount: 0.2, once: false });
+  const testimonialsRef = useRef(null);
+  const testimonialsInView = useInView(testimonialsRef, { amount: 0.2, once: false });
+  const pricingRef = useRef(null);
+  const pricingInView = useInView(pricingRef, { amount: 0.2, once: false });
+  const contactRef = useRef(null);
+  const contactInView = useInView(contactRef, { amount: 0.2, once: false });
+  const problemRef = useRef(null);
+  const problemInView = useInView(problemRef, { amount: 0.2, once: false });
+  const ctaRef = useRef(null);
+  const ctaInView = useInView(ctaRef, { amount: 0.2, once: false });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -162,7 +182,13 @@ export default function LandingPage() {
         </section>
 
         {/* Problem Section */}
-        <section className="problem modern-problem">
+        <motion.section
+          className="problem modern-problem"
+          ref={problemRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={problemInView ? "visible" : "hidden"}
+        >
           <div className="problem-header">
             <h2>Why Most Project Monitoring Fails</h2>
             <p>Even experienced teams hit roadblocks without the right tools.</p>
@@ -193,10 +219,17 @@ export default function LandingPage() {
   </div>
 </div>
 
-        </section>
+        </motion.section>
 
         {/* Features Section */}
-        <section id="features" className="features modern-features">
+        <motion.section
+          id="features"
+          className="features modern-features"
+          ref={featuresRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={featuresInView ? "visible" : "hidden"}
+        >
           <h2>Key Features</h2>
           <div className="features-cards">
             <div className="feature-card">
@@ -230,10 +263,17 @@ export default function LandingPage() {
               <p>Generate client-ready summaries in seconds.</p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* See it in Action Section */}
-        <section id="action" className="see-action">
+        <motion.section
+          id="action"
+          className="see-action"
+          ref={actionRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={actionInView ? "visible" : "hidden"}
+        >
           <h2>Track budget, work progress, and delays — all from one Excel tool.</h2>
           <p className="section-subtext">
             From planning to cost to delays — this is how real project managers stay ahead.
@@ -250,33 +290,61 @@ export default function LandingPage() {
               Your browser does not support the video tag.
             </video>
           </div>
-        </section>
+        </motion.section>
 
 
         {/* Testimonials */}
-        <div id="testimonials" className="testimonials-carousel-outer">
+        <motion.div
+          id="testimonials"
+          className="testimonials-carousel-outer"
+          ref={testimonialsRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={testimonialsInView ? "visible" : "hidden"}
+        >
           <TestimonialsCarousel />
-        </div>
+        </motion.div>
  {/* PricingSection */}
- <section id="pricing" className="pricing-section">
+ <motion.section
+  id="pricing"
+  className="pricing-section"
+  ref={pricingRef}
+  variants={fadeInVariant}
+  initial="hidden"
+  animate={pricingInView ? "visible" : "hidden"}
+>
  <div className="PricingSection-outer">
           <PricingSection onSelectPlan={setSelectedPlan} />
         </div>
-        </section>
+        </motion.section>
 
         {/* CTA Section */}
-        <section id="get-tool" className="cta">
+        <motion.section
+          id="get-tool"
+          className="cta"
+          ref={ctaRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={ctaInView ? "visible" : "hidden"}
+        >
   <h2>Start With the Free Demo — See How It Saves You Hours</h2>
   <p>This Excel-based tool is built by a 17-year project manager. Download, explore, and discover how it simplifies your workflow.</p>
   {/* <div className="cta-buttons">
     <a href={require('./assets/PMC_Tools_Demo.zip')} download className="primary-btn">Download Demo</a>
     <button className="secondary-btn" onClick={() => setShowVideo(true)}>Watch 1-Min Demo</button>
   </div> */}
-</section>
+</motion.section>
 
 
         {/* Contact Section */}
-        <div className="contact-form-outer" id="contact">
+        <motion.div
+          className="contact-form-outer"
+          id="contact"
+          ref={contactRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={contactInView ? "visible" : "hidden"}
+        >
           <form
             className="contact-form"
             onSubmit={handleSubmit}
@@ -322,7 +390,7 @@ export default function LandingPage() {
           {formStatus === "error" && (
             <p className="error">❌ Something went wrong. Please try again later.</p>
           )}
-        </div>
+        </motion.div>
 
         {/* WhatsApp FAB */}
         <FloatingWhatsApp />
