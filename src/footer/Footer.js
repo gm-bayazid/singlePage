@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, SendHorizonal } from 'lucide-react';
 import logo from '../assets/logo_footer.svg';
+import emailjs from '@emailjs/browser';
 
 import './Footer.scss';
 import linkedinIcon from '../assets/linkedin.svg';
@@ -27,11 +28,33 @@ const Footer = () => {
     }
 
     setIsLoading(true);
-    setTimeout(() => {
+    
+    // EmailJS configuration for newsletter subscription
+    const templateParams = {
+      to_email: 'support@milestonebd.com', // Your business email
+      from_email: email,
+      subject: 'Newsletter Subscription',
+      message: `New newsletter subscription from: ${email}`,
+      subscription_type: 'Newsletter'
+    };
+
+    emailjs.send(
+      'service_2wrml6l',
+      'template_zk5yxqa',
+      templateParams,
+      '5AXiVWGDz6vYTCeLK'
+    )
+    .then((response) => {
+      console.log('Newsletter subscription sent successfully:', response);
       setIsSubscribed(true);
       setIsLoading(false);
       setEmail('');
-    }, 1000);
+    })
+    .catch((error) => {
+      console.error('Newsletter subscription failed:', error);
+      setError('Failed to subscribe. Please try again.');
+      setIsLoading(false);
+    });
   };
 
   const currentYear = new Date().getFullYear();

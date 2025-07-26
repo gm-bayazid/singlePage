@@ -82,11 +82,15 @@ export default function LandingPage() {
     const { name, value } = e.target;
     const updated = { ...formValues, [name]: value };
     setFormValues(updated);
+    
+    // Check if all fields are filled, including selectedPlan for inquiryType
+    const inquiryTypeValue = name === 'inquiryType' ? value : (selectedPlan || updated.inquiryType);
+    
     setIsFormValid(
       updated.name.trim() &&
       updated.email.trim() &&
       updated.mobile.trim() &&
-      updated.inquiryType.trim() &&
+      inquiryTypeValue.trim() &&
       updated.message.trim()
     );
     setFormError('');
@@ -99,7 +103,8 @@ export default function LandingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formValues.name.trim() || !formValues.email.trim() || !formValues.mobile.trim() || !formValues.inquiryType.trim() || !formValues.message.trim()) {
+    const inquiryTypeValue = selectedPlan || formValues.inquiryType;
+    if (!formValues.name.trim() || !formValues.email.trim() || !formValues.mobile.trim() || !inquiryTypeValue.trim() || !formValues.message.trim()) {
       setFormError('! Please fill out all required fields.');
       return;
     }
@@ -110,12 +115,21 @@ export default function LandingPage() {
     setFormError('');
     setIsSending(true);
     setFormStatus(null);
-    // Add reCAPTCHA value to the form
-    // (EmailJS will include all form fields)
-    emailjs.sendForm(
+    
+    // Prepare template parameters with all form data
+    const templateParams = {
+      name: formValues.name,
+      email: formValues.email,
+      mobile: formValues.mobile,
+      inquiryType: selectedPlan || formValues.inquiryType,
+      message: formValues.message,
+      'g-recaptcha-response': recaptchaValue
+    };
+    
+    emailjs.send(
       'service_2wrml6l',
       'template_zk5yxqa',
-      e.target,
+      templateParams,
       '5AXiVWGDz6vYTCeLK'
     ).then(
       (result) => {
@@ -239,23 +253,23 @@ export default function LandingPage() {
             </div>
             <div className="feature-card">
               <span className="feature-icon">📊</span>
-              <h4>Cost Dashboard</h4>
-              <p>Instantly compare planned vs. actual spending.</p>
+              <h4>Project Dashboard</h4>
+              <p>Instantly compare planned vs. actual progress and many more.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">🧮</span>
-              <h4>Resource Sheet</h4>
-              <p>Analyze labor and materials over time.</p>
+              <h4>Cost Loading Sheet</h4>
+              <p>Analyze activities and cost over time.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">📅</span>
-              <h4>Gantt Chart</h4>
-              <p>Visual timeline with automatic updates.</p>
+              <h4>Look Ahead Sheet</h4>
+              <p>Visual timeline with automatic updates .</p>
             </div>
             <div className="feature-card">
-              <span className="feature-icon">⚠️</span>
-              <h4>Delay & Risk Log</h4>
-              <p>Flag issues before they escalate.</p>
+              <span className="feature-icon">📈</span>
+              <h4>Indepth Comparison Sheet</h4>
+              <p>Compare planned vs. actual quantity, delays, and many more.</p>
             </div>
             <div className="feature-card">
               <span className="feature-icon">📁</span>

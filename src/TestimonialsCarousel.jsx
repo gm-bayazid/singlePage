@@ -12,37 +12,37 @@ const testimonials = [
     avatar: "https://ui-avatars.com/api/?name=Rezaul+Karim&background=0D8ABC&color=fff",
   },
   {
-    name: "Sadia Rahman",
+    name: "Kausar Hossain",
     role: "Site Engineer",
     company: "Industrial EPC",
     location: "Chattogram",
     quote:
       "We don’t use Primavera or MS Project, so this tool filled the gap perfectly.",
-    avatar: "https://ui-avatars.com/api/?name=Sadia+Rahman&background=673AB7&color=fff",
+    avatar: "https://ui-avatars.com/api/?name=Kausar+Hossain&background=673AB7&color=fff",
   },
   {
     name: "Tanvir Hasan",
-    role: "Senior Planner",
+    role: "Senior Manager",
     company: "Large Construction Firm",
-    location: "Sylhet",
+    location: "Gazipur",
     quote:
       "This tool cut our reporting time by 60%. It’s exactly what we needed for field-level clarity.",
     avatar: "https://ui-avatars.com/api/?name=Tanvir+Hasan&background=009688&color=fff",
   },
   {
-    name: "Farhana Chowdhury",
+    name: "Atiqul Islam",
     role: "Operations Head",
-    company: "Tech Infra Solutions",
-    location: "Rajshahi",
+    company: "Real Estate Developer Company",
+    location: "Dhaka",
     quote:
       "The best part? My site engineers actually use it without complaint.",
-    avatar: "https://ui-avatars.com/api/?name=Farhana+Chowdhury&background=F57C00&color=fff",
+    avatar: "https://ui-avatars.com/api/?name=Atiqul+Islam&background=F57C00&color=fff",
   },
   {
     name: "Zahidul Alam",
     role: "Project Consultant",
-    company: "SME Developer",
-    location: "Khulna",
+    company: "Real Estate Developer Company",
+    location: "Cumilla",
     quote:
       "We replaced 3 apps with this Excel tool. It’s clean, smart, and battle-tested.",
     avatar: "https://ui-avatars.com/api/?name=Zahidul+Alam&background=3F51B5&color=fff",
@@ -98,7 +98,7 @@ const TestimonialsCarousel = () => {
 
   return (
     <section className="testimonials-carousel-section dark-theme">
-      <h2>What Engineers Are Saying</h2>
+      <h2>What Engineers are Saying</h2>
       <div className="carousel-wrapper">
         <button className="nav-arrow left" onClick={() => scroll("left")} aria-label="Previous">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none">

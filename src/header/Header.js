@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './Header.scss';
 import logo from '../assets/logo_footer.svg';
 
-const sections = ['product', 'features', 'pricing', 'testimonials', 'contact'];
+const sections = ['product', 'features', 'pricing', 'download', 'contact'];
 
 const Header = ({ stickyThreshold = 150 }) => {
   const [isSticky, setIsSticky] = useState(false);
@@ -56,10 +56,10 @@ const Header = ({ stickyThreshold = 150 }) => {
             {sections.map(section => (
               <Nav.Link
                 key={section}
-                href={`#${section}`}
+                href={`#${section === 'download' ? 'pricing' : section}`}
                 className={activeSection === section ? 'active' : ''}
               >
-                {section === 'pricing' ? 'Plans & Services' : section.charAt(0).toUpperCase() + section.slice(1)}
+                {section === 'pricing' ? 'Plans & Services' : section === 'download' ? 'Download' : section.charAt(0).toUpperCase() + section.slice(1)}
               </Nav.Link>
             ))}
             {/* Optional Search Icon */}

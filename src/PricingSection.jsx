@@ -36,11 +36,11 @@ const plans = [
     title: 'Pro Subscription',
     //price: 'Tk. 250 / month',
     features: [
-      'Live Support via WhatsApp/Email',
+      'Support via WhatsApp/Email',
       'Priority Feature Requests',
-      'Monthly Report Generation',
+      'Weekly Report Generation',
       'All Tool Updates Included',
-      'Unlimited Projects'
+      'Executive Attendance in Weekly Stakeholder Meeting'
     ],
     action: {
       label: 'Start Subscription',
