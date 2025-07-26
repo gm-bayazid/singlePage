@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PricingSection.css';
+import BookingModal from './BookingModal';
 
 const plans = [
   {
@@ -50,6 +51,15 @@ const plans = [
 ];
 
 export default function PricingSection({ onSelectPlan }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlanForModal, setSelectedPlanForModal] = useState('');
+
+  const handleBookingClick = (planTitle) => {
+    setSelectedPlanForModal(planTitle);
+    setIsModalOpen(true);
+    if (onSelectPlan) onSelectPlan(planTitle);
+  };
+
   return (
     <section className="pricing-section">
       <h2 className="pricing-title">Plans & Services</h2>
@@ -78,11 +88,7 @@ export default function PricingSection({ onSelectPlan }) {
               <button
                 type="button"
                 className="plan-button"
-                onClick={() => {
-                  if (onSelectPlan) onSelectPlan(plan.title);
-                  const contact = document.getElementById('contact');
-                  if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={() => handleBookingClick(plan.title)}
               >
                 {plan.action.label}
               </button>
@@ -102,6 +108,12 @@ export default function PricingSection({ onSelectPlan }) {
         <p>📍 Built in Bangladesh for global project teams</p>
         <p>🔒 Secure checkout powered by Stripe</p>
       </div> */}
+
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedPlan={selectedPlanForModal}
+      />
     </section>
   );
 }

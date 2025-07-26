@@ -83,6 +83,11 @@ export default function LandingPage() {
     const updated = { ...formValues, [name]: value };
     setFormValues(updated);
     
+    // If user manually changes inquiryType, clear selectedPlan
+    if (name === 'inquiryType') {
+      setSelectedPlan('');
+    }
+    
     // Check if all fields are filled, including selectedPlan for inquiryType
     const inquiryTypeValue = name === 'inquiryType' ? value : (selectedPlan || updated.inquiryType);
     
@@ -308,7 +313,7 @@ export default function LandingPage() {
 
 
         {/* Testimonials */}
-        <motion.div
+        {/* <motion.div
           id="testimonials"
           className="testimonials-carousel-outer"
           ref={testimonialsRef}
@@ -317,7 +322,7 @@ export default function LandingPage() {
           animate={testimonialsInView ? "visible" : "hidden"}
         >
           <TestimonialsCarousel />
-        </motion.div>
+        </motion.div> */}
  {/* PricingSection */}
  <motion.section
   id="pricing"

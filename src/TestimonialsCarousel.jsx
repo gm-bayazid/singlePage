@@ -3,49 +3,49 @@ import "./TestimonialsCarousel.css";
 
 const testimonials = [
   {
-    name: "Rezaul Karim",
-    role: "Project Manager",
-    company: "Mid-size Contractor",
+    name: "Engr. Borhan Uddin, PMP",
+    role: "Senior Planning Engineer",
+    company: "Max Group",
     location: "Dhaka",
     quote:
-      "Before this, weekly reporting took us hours. Now it’s automated and easy to share with clients.",
-    avatar: "https://ui-avatars.com/api/?name=Rezaul+Karim&background=0D8ABC&color=fff",
+      "Excel Project Monitor is exactly what construction managers need. The Excel-based approach makes it accessible to everyone, while the tracking features rival expensive software solutions.",
+    avatar: "https://ui-avatars.com/api/?name=Borhan+Uddin&background=0D8ABC&color=fff",
   },
   {
-    name: "Kausar Hossain",
-    role: "Site Engineer",
-    company: "Industrial EPC",
-    location: "Chattogram",
+    name: "Engr. Rezaul Karim",
+    role: "Head of Construction",
+    company: "Abul Hossain Group",
+    location: "Dhaka",
     quote:
-      "We don’t use Primavera or MS Project, so this tool filled the gap perfectly.",
-    avatar: "https://ui-avatars.com/api/?name=Kausar+Hossain&background=673AB7&color=fff",
+      "This tool could revolutionize how small to medium construction companies manage their projects. Simple, effective, and affordable - exactly what the industry needs.",
+    avatar: "https://ui-avatars.com/api/?name=Rezaul+Karim&background=673AB7&color=fff",
   },
   {
-    name: "Tanvir Hasan",
-    role: "Senior Manager",
-    company: "Large Construction Firm",
+    name: "Engr. Sohel Ahmed",
+    role: "Project Management Expert",
+    company: "Construction Tech Institute",
+    location: "Dhaka",
+    quote:
+      "Having reviewed countless project management tools, this Excel-based solution stands out for its practicality. It addresses real pain points without overwhelming complexity.",
+    avatar: "https://ui-avatars.com/api/?name=Michael+Chen&background=009688&color=fff",
+  },
+  {
+    name: "Emily Rodriguez",
+    role: "Operations Director",
+    company: "Urban Development Partners",
     location: "Gazipur",
     quote:
-      "This tool cut our reporting time by 60%. It’s exactly what we needed for field-level clarity.",
-    avatar: "https://ui-avatars.com/api/?name=Tanvir+Hasan&background=009688&color=fff",
+      "The dashboard gives instant visibility into project progress without the complexity of expensive software. This is the kind of tool that gets adopted quickly by field teams.",
+    avatar: "https://ui-avatars.com/api/?name=Emily+Rodriguez&background=F57C00&color=fff",
   },
   {
-    name: "Atiqul Islam",
-    role: "Operations Head",
-    company: "Real Estate Developer Company",
+    name: "David Kim",
+    role: "Construction Technology Advisor",
+    company: "SmartBuild Consulting",
     location: "Dhaka",
     quote:
-      "The best part? My site engineers actually use it without complaint.",
-    avatar: "https://ui-avatars.com/api/?name=Atiqul+Islam&background=F57C00&color=fff",
-  },
-  {
-    name: "Zahidul Alam",
-    role: "Project Consultant",
-    company: "Real Estate Developer Company",
-    location: "Cumilla",
-    quote:
-      "We replaced 3 apps with this Excel tool. It’s clean, smart, and battle-tested.",
-    avatar: "https://ui-avatars.com/api/?name=Zahidul+Alam&background=3F51B5&color=fff",
+      "This tool addresses real pain points I've seen in construction project management. The Excel integration is brilliant - it leverages what teams already know and use daily.",
+    avatar: "https://ui-avatars.com/api/?name=David+Kim&background=3F51B5&color=fff",
   }
 ];
 
@@ -98,7 +98,7 @@ const TestimonialsCarousel = () => {
 
   return (
     <section className="testimonials-carousel-section dark-theme">
-      <h2>What Engineers are Saying</h2>
+      <h2>What Our Partners Say</h2>
       <div className="carousel-wrapper">
         <button className="nav-arrow left" onClick={() => scroll("left")} aria-label="Previous">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
