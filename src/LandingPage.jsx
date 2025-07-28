@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from '@emailjs/browser';
+import { useNavigate, useLocation } from "react-router-dom";
 import "./LandingPage.css";
 import thumbnail from "./assets/thumbnail01.png";
-import dashboard from "./assets/dashboard_straight.svg";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import "./header/Header.scss";
 import "./footer/Footer.scss";
 import ShowcaseStack from "./ShowcaseStack";
-import TestimonialsCarousel from "./TestimonialsCarousel";
 import FloatingWhatsApp from "./FloatingWhatsApp";
 import PricingSection from "./PricingSection";
 import { Helmet } from 'react-helmet';
@@ -45,12 +44,13 @@ const fadeInVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
 };
 
-export default function LandingPage() {
+export default function LandingPage({ scrollTo }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [formStatus, setFormStatus] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
   const [showStack, setShowStack] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -67,16 +67,41 @@ export default function LandingPage() {
   const featuresInView = useInView(featuresRef, { amount: 0.2, once: false });
   const actionRef = useRef(null);
   const actionInView = useInView(actionRef, { amount: 0.2, once: false });
-  const testimonialsRef = useRef(null);
-  const testimonialsInView = useInView(testimonialsRef, { amount: 0.2, once: false });
   const pricingRef = useRef(null);
   const pricingInView = useInView(pricingRef, { amount: 0.2, once: false });
   const contactRef = useRef(null);
   const contactInView = useInView(contactRef, { amount: 0.2, once: false });
   const problemRef = useRef(null);
   const problemInView = useInView(problemRef, { amount: 0.2, once: false });
+  const solutionRef = useRef(null);
+  const solutionInView = useInView(solutionRef, { amount: 0.2, once: false });
+  const whoRef = useRef(null);
+  const whoInView = useInView(whoRef, { amount: 0.2, once: false });
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { amount: 0.2, once: false });
+
+  // Handle scrollTo prop and route-based scrolling
+  useEffect(() => {
+    if (scrollTo) {
+      const element = document.getElementById(scrollTo);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [scrollTo]);
+
+  // Clean URL when component mounts
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 2000); // Clean URL after 2 seconds
+    }
+  }, [location.pathname, navigate]);
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -91,13 +116,6 @@ export default function LandingPage() {
     // Check if all fields are filled, including selectedPlan for inquiryType
     const inquiryTypeValue = name === 'inquiryType' ? value : (selectedPlan || updated.inquiryType);
     
-    setIsFormValid(
-      updated.name.trim() &&
-      updated.email.trim() &&
-      updated.mobile.trim() &&
-      inquiryTypeValue.trim() &&
-      updated.message.trim()
-    );
     setFormError('');
   };
 
@@ -140,7 +158,6 @@ export default function LandingPage() {
       (result) => {
         setFormStatus("success");
         setFormValues({ name: "", email: "", mobile: "", inquiryType: "", message: "" });
-        setIsFormValid(false);
         setRecaptchaValue(null);
         e.target.reset();
         setIsSending(false);
@@ -157,20 +174,42 @@ export default function LandingPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Excel Project Monitor | Construction Project Management Tool</title>
-        <meta name="description" content="Track progress, costs, and deadlines with our Excel-based project management tool for construction teams." />
-        <meta property="og:title" content="Excel Project Monitor" />
-        <meta property="og:description" content="Track progress, costs, and deadlines with our Excel-based project management tool for construction teams." />
-        <meta property="og:image" content="/logo192.png" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://milestonebd.com/" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Excel Project Monitor" />
-        <meta name="twitter:description" content="Track progress, costs, and deadlines with our Excel-based project management tool for construction teams." />
-        <meta name="twitter:image" content="/logo192.png" />
-        <link rel="canonical" href="https://milestonebd.com/" />
-      </Helmet>
+              <Helmet>
+          <title>milestoneBD | Excel Project Monitoring Tool for Construction</title>
+          <meta name="description" content="Professional Excel-based project monitoring tool for construction managers. Track progress, costs, and deadlines with our 17-year veteran designed solution." />
+          <meta name="keywords" content="project monitoring, construction management, Excel tools, project tracking, cost management, construction software" />
+          <meta property="og:title" content="milestoneBD - Excel Project Monitoring Tool" />
+          <meta property="og:description" content="Professional Excel-based project monitoring tool for construction managers. Track progress, costs, and deadlines with our 17-year veteran designed solution." />
+          <meta property="og:image" content="https://milestonebd.com/logo192.png" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://milestonebd.com/" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="milestoneBD - Excel Project Monitoring Tool" />
+          <meta name="twitter:description" content="Professional Excel-based project monitoring tool for construction managers. Track progress, costs, and deadlines." />
+          <meta name="twitter:image" content="https://milestonebd.com/logo192.png" />
+          <link rel="canonical" href="https://milestonebd.com/" />
+          <meta name="robots" content="index, follow" />
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "milestoneBD",
+                "url": "https://milestonebd.com/",
+                "logo": "https://milestonebd.com/logo192.png"
+              }
+            `}
+          </script>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZH8BY50WT7"></script>
+          <script>
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ZH8BY50WT7');
+            `}
+          </script>
+        </Helmet>
       <Header />
       <main className="landing-container">
         {/* Hero Section */}
@@ -240,6 +279,44 @@ export default function LandingPage() {
 
         </motion.section>
 
+        {/* Solution Section */}
+        <motion.section
+          className="solution modern-solution"
+          ref={solutionRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={solutionInView ? "visible" : "hidden"}
+        >
+          <h2>Introducing the Field-Tested Excel Tool Built for Real Construction Projects</h2>
+          <p>This isn't a template you found online. It's a powerful, plug-and-play Excel tool crafted from 17+ years of hard-earned field experience.</p>
+          <div className="solution-cards">
+            <div className="solution-card">
+              <span className="solution-icon">📊</span>
+              <h4>Track daily progress in real-time</h4>
+              <p>Monitor work status, milestones, and deliverables at a glance.</p>
+            </div>
+            <div className="solution-card">
+              <span className="solution-icon">💰</span>
+              <h4>Monitor budget vs. actual costs</h4>
+              <p>Compare planned vs. actual expenses with instant updates.</p>
+            </div>
+            <div className="solution-card">
+              <span className="solution-icon">📈</span>
+              <h4>Generate reports without formulas</h4>
+              <p>Create client-ready summaries in seconds, no Excel expertise needed.</p>
+            </div>
+            <div className="solution-card">
+              <span className="solution-icon">🎯</span>
+              <h4>Stay in control — on-site or off-site</h4>
+              <p>Access your project data anywhere, anytime with full control.</p>
+            </div>
+          </div>
+          <div className="solution-highlight">
+            <h3>And the best part?</h3>
+            <p>You don't need to learn any new software. If you can use Excel, you can use this.</p>
+          </div>
+        </motion.section>
+
         {/* Features Section */}
         <motion.section
           id="features"
@@ -281,6 +358,43 @@ export default function LandingPage() {
               <h4>Auto Reports</h4>
               <p>Generate client-ready summaries in seconds.</p>
             </div>
+          </div>
+        </motion.section>
+
+        {/* Who This Is For Section */}
+        <motion.section
+          className="who modern-who"
+          ref={whoRef}
+          variants={fadeInVariant}
+          initial="hidden"
+          animate={whoInView ? "visible" : "hidden"}
+        >
+          <h2>Who Will Benefit Most</h2>
+          <p>This tool is built for professionals who manage projects in the real world — not in theoretical dashboards.</p>
+          <div className="who-cards">
+            <div className="who-card">
+              <span className="who-icon">👷</span>
+              <h4>Project Manager</h4>
+              <p>Tired of chasing site updates and struggling with scattered data.</p>
+            </div>
+            <div className="who-card">
+              <span className="who-icon">🏗️</span>
+              <h4>Civil Engineer</h4>
+              <p>Struggling with reporting deadlines and client communication.</p>
+            </div>
+            <div className="who-card">
+              <span className="who-icon">📋</span>
+              <h4>Contractor</h4>
+              <p>Needs better tracking for government projects and compliance.</p>
+            </div>
+            <div className="who-card">
+              <span className="who-icon">🔧</span>
+              <h4>Site Engineer</h4>
+              <p>Balancing multiple tasks daily while managing field operations.</p>
+            </div>
+          </div>
+          <div className="who-highlight">
+            <h3>...this tool will feel like your secret weapon.</h3>
           </div>
         </motion.section>
 
@@ -346,8 +460,12 @@ export default function LandingPage() {
           initial="hidden"
           animate={ctaInView ? "visible" : "hidden"}
         >
-  <h2>Start With the Free Demo — See How It Saves You Hours</h2>
-  <p>This Excel-based tool is built by a 17-year project manager. Download, explore, and discover how it simplifies your workflow.</p>
+  <h2>Let Excel Do the Work — You Focus on the Build</h2>
+  <p>I’ve spent 17 years managing construction projects — and I built this tool because I needed it myself.
+Now I’m sharing it with professionals who want a smarter, simpler way to stay on top of every project.
+
+No big learning curve. No bloated software.
+Just a clean, powerful tool that helps you deliver.</p>
   {/* <div className="cta-buttons">
     <a href={require('./assets/PMC_Tools_Demo.zip')} download className="primary-btn">Download Demo</a>
     <button className="secondary-btn" onClick={() => setShowVideo(true)}>Watch 1-Min Demo</button>

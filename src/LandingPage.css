@@ -18,6 +18,7 @@ body, html {
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 input, textarea {
@@ -499,6 +500,211 @@ ul.problem-list li {
   .problem-card {
     max-width: 100%;
     width: 100%;
+  }
+}
+
+/* Solution Section Styles */
+.modern-solution {
+  background: var(--color-bg-alt);
+  /*border: 1px solid #232a36;*/
+  border-radius: 18px;
+  padding: 48px 24px;
+  margin: 48px 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  text-align: center;
+}
+
+.modern-solution h2 {
+  margin-bottom: 0.5rem;
+}
+
+.modern-solution p {
+  margin-bottom: 2rem;
+  color: var(--color-text-alt);
+}
+
+.solution-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.solution-card {
+  background: #121212;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  flex: 1 1 280px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.solution-card:hover {
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  transform: translateY(-4px);
+}
+
+.solution-icon {
+  font-size: 1.75rem;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.solution-card h4 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.solution-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-alt);
+  line-height: 1.5;
+}
+
+.solution-highlight {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.solution-highlight h3 {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.solution-highlight p {
+  color: var(--color-text-alt);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .solution-cards {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  .solution-card {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Who This Is For Section Styles */
+.modern-who {
+  background: var(--color-bg-alt);
+ /*border: 1px solid #232a36;*/
+  border-radius: 18px;
+  padding: 48px 24px;
+  margin: 48px 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  text-align: center;
+}
+
+.modern-who h2 {
+  margin-bottom: 0.5rem;
+}
+
+.modern-who p {
+  margin-bottom: 2rem;
+  color: var(--color-text-alt);
+}
+
+.who-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.who-card {
+  background: #121212;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  flex: 1 1 280px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.who-card:hover {
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  transform: translateY(-4px);
+}
+
+.who-icon {
+  font-size: 1.75rem;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.who-card h4 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.who-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-alt);
+  line-height: 1.5;
+}
+
+.who-highlight {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.who-highlight h3 {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .who-cards {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  .who-card {
+    width: 100%;
+    max-width: 100%;
   }
 }
 

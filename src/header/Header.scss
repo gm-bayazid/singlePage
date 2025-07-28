@@ -62,8 +62,8 @@
 
 .main-nav .nav-link:hover,
 .main-nav .nav-link.active {
-  background: #000000;
-  color: #000000;
+  background: transparent;
+  color: #ffffff;
   transform: translateY(-2px) scale(1.03);
 }
 
@@ -97,7 +97,7 @@
 .main-nav .nav-link:focus {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
-  background: #f3f4fa;
+  background: transparent;
   border-radius: 4px;
 }
 

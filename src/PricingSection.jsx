@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PricingSection.css';
 import BookingModal from './BookingModal';
+import DemoModal from './DemoModal';
 
 const plans = [
   {
@@ -25,7 +26,7 @@ const plans = [
       'Custom Dashboard Config.',
       'Excel File + Lifetime License',
       '3x Training Videos Included',
-      'Email Support (14 Days)'
+      'Email Support (30 Days)'
     ],
     action: {
       label: 'Book Setup Now',
@@ -53,11 +54,16 @@ const plans = [
 export default function PricingSection({ onSelectPlan }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlanForModal, setSelectedPlanForModal] = useState('');
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const handleBookingClick = (planTitle) => {
     setSelectedPlanForModal(planTitle);
     setIsModalOpen(true);
     if (onSelectPlan) onSelectPlan(planTitle);
+  };
+
+  const handleDemoClick = () => {
+    setIsDemoModalOpen(true);
   };
 
   return (
@@ -77,13 +83,13 @@ export default function PricingSection({ onSelectPlan }) {
               ))}
             </ul>
             {plan.title === 'Free Demo' ? (
-              <a
-                href={plan.action.link}
+              <button
+                type="button"
                 className="plan-button"
-                download
+                onClick={handleDemoClick}
               >
                 {plan.action.label}
-              </a>
+              </button>
             ) : (
               <button
                 type="button"
@@ -113,6 +119,11 @@ export default function PricingSection({ onSelectPlan }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         selectedPlan={selectedPlanForModal}
+      />
+
+      <DemoModal
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
       />
     </section>
   );

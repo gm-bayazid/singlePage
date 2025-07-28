@@ -1,13 +1,15 @@
 // Header.jsx
 import React, { useEffect, useState, useCallback } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Header.scss';
 import logo from '../assets/logo_footer.svg';
 
-const sections = ['product', 'features', 'pricing', 'download', 'contact'];
+const sections = ['features', 'pricing', 'download', 'contact'];
 
 const Header = ({ stickyThreshold = 150 }) => {
+  const navigate = useNavigate();
   const [isSticky, setIsSticky] = useState(false);
   const [activeSection, setActiveSection] = useState('product');
 
@@ -56,8 +58,13 @@ const Header = ({ stickyThreshold = 150 }) => {
             {sections.map(section => (
               <Nav.Link
                 key={section}
-                href={`#${section === 'download' ? 'pricing' : section}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const targetSection = section === 'download' ? 'pricing' : section;
+                  navigate(`/${targetSection}`);
+                }}
                 className={activeSection === section ? 'active' : ''}
+                style={{ cursor: 'pointer' }}
               >
                 {section === 'pricing' ? 'Plans & Services' : section === 'download' ? 'Download' : section.charAt(0).toUpperCase() + section.slice(1)}
               </Nav.Link>
